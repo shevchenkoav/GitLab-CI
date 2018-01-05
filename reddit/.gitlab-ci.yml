@@ -1,0 +1,47 @@
+stages:
+  - build
+  - test
+  - review
+  - stage
+  - production
+
+build:
+  stage: build
+  script:
+    - echo 'Building'
+
+tests:
+  stage: test
+  script:
+    - echo 'Testing 1'
+
+linters:
+  stage: test
+  script:
+    - echo 'Testing 2'
+
+autodeploy dev:
+  stage: review
+  script:
+    - echo 'Deploy'
+  environment:
+    name: dev
+    url: http://dev.example.com
+
+staging:
+  stage: stage
+  when: manual
+  script:
+    - echo 'Deploy'
+  environment:
+    name: stage
+    url: https://beta.example.com
+
+production:
+  stage: production
+  when: manual
+  script:
+    - echo 'Deploy'
+  environment:
+    name: production
+    url: https://example.com
